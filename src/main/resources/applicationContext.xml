@@ -1,11 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<bean id="myLifeBean" class="yeling.spring.lifecycle.MyLifeBeanImpl" init-method="init">
+		<property name="greeting"><value>Hello, </value></property>
+	</bean>
+	<bean class="yeling.spring.lifecycle.CustomBeanPostProcessor"/>
+<!--  
+	<context:component-scan base-package="yeling.spring.polymorphism"></context:component-scan>
+	<bean id="sonny" class="yeling.spring.polymorphism.SonySpeaker"></bean>-->
 	
+<!-- 
+	<bean id="collectionBean" class="yeling.spring.collection.CollectionBean">
+		<property name="addressList">
+		<list>
+				<value>서울시 서초구 서초동</value>
+				<value>서울시 관악구 봉천동</value>
+			</list> 
+		<map>
+				<entry>
+					<key><value>기매링</value></key>
+					<value>봉천동</value>
+				</entry>
+				<entry>
+					<key><value>깜자</value></key>
+					<value>강원도</value>
+				</entry>
+			</map>	 
+		<props>
+				<prop key="기매링">관악구</prop>
+				<prop key="깜자">강원도</prop>
+			</props>
+			<set value-type="java.lang.String">
+				<value>서울시 서초구 서초동</value>
+				<value>서울시 관악구 봉천동</value>
+				<value>서울시 동대문구 장안동</value>
+			</set>
+			
+		</property>
+	</bean>
+ -->	
 <!--<bean id="tv" class="yeling.spring.polymorphism.SamsungTV" />-->
 <!--<bean id="tv" class="yeling.spring.polymorphism.SamsungTV" init-method="start" destroy-method="stop"/>-->
 	
-	<bean id="tv" class="yeling.spring.polymorphism.SamsungTV" scope="prototype"/>
+<!--<bean id="tv" class="yeling.spring.polymorphism.SamsungTV" scope="prototype"/>-->
 <!--<bean id="tv" class="yeling.spring.polymorphism.SamsungTV" lazy-init="true"/> -->
+
+<!-- Injection 1 -->
+<!--<bean id="tv" class="yeling.spring.polymorphism.SamsungTV" >
+		<constructor-arg index="0" ref="apple"></constructor-arg>
+		<constructor-arg index="1" value="3000000"></constructor-arg>
+	</bean>
+	<bean id="sony" class="yeling.spring.polymorphism.SonySpeaker"/>
+	<bean id="apple" class="yeling.spring.polymorphism.AppleSpeaker"/>-->
+	
+<!-- Injection 2 -->
+<!--<bean id="tv" class="yeling.spring.polymorphism.SamsungTV" >
+		<property name="speaker" ref="apple" />
+		<property name="price" value="3000000"/>
+	</bean>
+	<bean id="sony" class="yeling.spring.polymorphism.SonySpeaker"/>
+	<bean id="apple" class="yeling.spring.polymorphism.AppleSpeaker"/>-->
+	
+<!-- p네임스페이스 -->
+<!-- <bean id="tv" class="yeling.spring.polymorphism.SamsungTV" p:speaker-ref="sony" p:price="2800000"/>-->	
+	
 </beans>
