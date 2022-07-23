@@ -4,15 +4,16 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.Controller;
 
 import yeling.spring.web.board.impl.BoardDAO;
-import yeling.spring.web.controller.Controller;
+
 
 public class GetBoardListController implements Controller {
 
 	@Override
-	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) {
 		System.out.println("글 목록 검색 처리");
 		//1. 사용자 입력 정보 추출 : 검색 기능은 나중에 구현
 		
@@ -22,9 +23,10 @@ public class GetBoardListController implements Controller {
 		List<BoardVO> boardList = boardDAO.getBoardList(vo);
 		
 		//3. 응답 화면 구성
-		HttpSession session = request.getSession();
-		session.setAttribute("boardList", boardList);
-		return "getBoardList";
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("boardList", boardList); //Model정보 저장
+		mav.setViewName("getBoardList"); //View 정보 저장
+		return mav;
 	}
 
 }
