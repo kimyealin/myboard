@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
-	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+	<context:component-scan base-package="yeling.spring.web">
+	</context:component-scan>
+
+<!-- 	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
 		<property name="mappings">
 			<props>
 				<prop key="/login.do">login</prop>
@@ -24,9 +29,9 @@
 	<bean id="deleteBoard" class="yeling.spring.web.board.DeleteBoardController"></bean>
 	<bean id="logout" class="yeling.spring.web.user.LogoutController"></bean>
 	
-	<!-- ViewResovler 등록 -->
+	ViewResovler 등록
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/board/"></property>
 		<property name="suffix" value=".jsp"></property>
-	</bean>
+	</bean> -->
 </beans>

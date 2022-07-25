@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import yeling.spring.web.board.BoardVO;
 
+/*
 @Repository
 public class BoardDAOSpring {
 	@Autowired
@@ -48,3 +49,4 @@ public class BoardDAOSpring {
 		return jdbcTemplate.query(BOARD_LIST, new BoardRowMapper());
 	}
 }
+*/

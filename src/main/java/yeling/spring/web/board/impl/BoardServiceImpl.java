@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import yeling.spring.web.board.BoardService;
 import yeling.spring.web.board.BoardVO;
-
+/*
 @Service("boardService")
 public class BoardServiceImpl implements BoardService {
 
@@ -43,3 +43,4 @@ public class BoardServiceImpl implements BoardService {
 		return boardDAO.getBoardList(vo);
 	}
 }
+*/
