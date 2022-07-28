@@ -11,6 +11,8 @@
 <hr><br>
 <a href="login.do">로그인</a><br><br>
 <a href="getBoardList.do">글 목록으로 가기</a><br><br>
+<a href="dataTransformXML.do">글 목록 변환 처리 - XML</a><br><br>
+<a href="dataTransformJSON.do">글 목록 변환 처리 - JSON</a>
 <hr>
 </body>
 </html>

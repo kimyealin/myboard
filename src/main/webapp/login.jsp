@@ -22,7 +22,7 @@
 		<td><spring:message code="user.login.password" /></td>
 		<td><input type="password" name="password" value="${userVO.password }"/></td>
 	</tr>
-	<tr><td colspan="2"><input type="submit" value="<spring:message code="user.login.user.login.loginBtn" />" /></td></tr>
+	<tr><td colspan="2"><input type="submit" value="<spring:message code="user.login.loginBtn" />" /></td></tr>
 </table>
 </form>
 </body>

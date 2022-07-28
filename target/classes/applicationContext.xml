@@ -15,6 +15,14 @@
 
 <context:component-scan base-package="yeling.spring.web"></context:component-scan>
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+
+	<bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:mybatis-config.xml" />
+	</bean>
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sessionFactory" />
+	</bean>
 	
 	<!-- DataSource 등록 -->
 <!-- <context:property-placeholder location="classpath:config/database.properties" /> 

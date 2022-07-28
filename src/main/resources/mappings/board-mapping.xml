@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BoardDAO">
+	<resultMap type="myboard" id="boardResult">
+		<id property="seq" column="SEQ" />
+		<result property="title" column="TITLE" />
+		<result property="writer" column="WRITER" />
+		<result property="content" column="CONTENT" />
+		<result property="regDate" column="REGDATE" />
+		<result property="cnt" column="CNT" />
+	</resultMap>
+	
+	<insert id="insertBoard" parameterType="myboard">
+		insert into myboard (seq, title, writer, content)values((select nvl(max(seq), 0)+1 from myboard), #{title}, #{writer}, #{content})
+	</insert>
+	<update id="updateBoard" parameterType="myboard">
+		update myboard set title=#{title}, content=#{content} where seq=#{seq}
+	</update>
+	<delete id="deleteBoard" parameterType="myboard">
+		delete from myboard where seq=#{seq}
+	</delete>
+	<select id="getBoard" resultType="myboard">
+		select * from myboard where seq=#{seq}
+	</select>
+	<select id="getBoardList" resultMap="boardResult">
+		select * from myboard where 1=1 
+		<if test="searchCondition=='TITLE'"> AND title like '%'||#{searchKeyword}||'%'</if>
+		<if test="searchCondition=='CONTENT'"> AND content like '%'||#{searchKeyword}||'%'</if>
+		order by seq desc
+	</select>
+</mapper>
