@@ -16,12 +16,23 @@
 <context:component-scan base-package="yeling.spring.web"></context:component-scan>
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 
+	<!-- 스프링과 JPA연동 설정 -->
+	<bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"></bean>
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="jpaVendorAdapter" ref="jpaVendorAdapter"></property>
+	</bean>
+
 	<bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="configLocation" value="classpath:mybatis-config.xml" />
 	</bean>
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="sessionFactory" />
+	</bean>
+	
+	<bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory"></property>
 	</bean>
 	
 	<!-- DataSource 등록 -->
@@ -45,7 +56,7 @@
 	</bean>
 	
 	<!-- Transaction 설정 -->
-	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+<!--<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
 	<tx:advice id="txAdvice" transaction-manager="txManager">
@@ -58,7 +69,7 @@
 	<aop:config>
 		<aop:pointcut expression="execution(* yeling.spring.web..*(..))" id="txPointcut"/>
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut"/>
-	</aop:config>
+	</aop:config>-->
 	
 	
 <!--<bean id="log" class="yeling.spring.web.common.Log4jAdvice"></bean>
